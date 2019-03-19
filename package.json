@@ -1,0 +1,27 @@
+{
+  "name": "bil",
+  "version": "0.0.1",
+  "description": "Bil I guess",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/finninde/bil.git"
+  },
+  "keywords": [
+    "bil"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/finninde/bil/issues"
+  },
+  "homepage": "https://github.com/finninde/bil#readme"
+}
