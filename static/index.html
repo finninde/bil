@@ -14,7 +14,7 @@
 
   </body>
   <script>
-        var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+        var mymap = L.map('mapid').setView([63.417831662, 10.401831726], 17);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -26,7 +26,7 @@
         var marker = L.marker([51.5, -0.09]).addTo(mymap);
         socket.on('chat message', function(msg){
             console.log(msg);
-            marker.setLatLng([msg.latVal,msg.longVal]);
+            marker.setLatLng([msg.longVal,msg.latVal]);
         });
     </script>
 </html>
