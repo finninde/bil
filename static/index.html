@@ -24,7 +24,7 @@
         var socket = io();
         // Change default marker into something better
         var marker = L.marker([51.5, -0.09]).addTo(mymap);
-        socket.on('chat message', function(msg){
+        socket.on('car position update', function(msg){
             console.log(msg);
             marker.setLatLng([msg.longVal,msg.latVal]);
         });

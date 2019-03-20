@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 app.post('/vehicle/:vehicleID/long/:longVal/lat/:latVal', function(req,res){
     console.log(req.params);
     res.json('200 OK');
-    io.emit('chat message', req.params);
+    io.emit('car position update', req.params);
 })
 
 http.listen(3000);
