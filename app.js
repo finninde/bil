@@ -21,7 +21,8 @@ app.post('/vehicle/:vehicleID/long/:longVal/lat/:latVal', function(req,res){
     console.log(req.params);
     res.json('200 OK');
     io.emit('car position update', req.params);
-})
+});
 
 http.listen(3000);
 // https://www.vegvesen.no/vegkart/vegkart/#kartlag:geodata/vegreferanse:270896.3668887719:7040192.320446634/hva:(~(farge:'0_0,id:95))/@270874,7040224,18/vegobjekt:536626829:40a744:95
+// GET https://www.vegvesen.no/nvdb/api/v2/omrader/fylker?inkluder=kartutsnitt,vegobjekt
