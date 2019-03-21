@@ -10,7 +10,7 @@ var io = require('socket.io')(http);
 */
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/static/index.html');
-  });
+});
 
 /* Entrypoint for vehicle posting location
  * Updates all sockets to vehicles current state, returns status code to vehicle
@@ -25,5 +25,3 @@ app.post('/vehicle/:vehicleID/long/:longVal/lat/:latVal', function(req,res){
 
 http.listen(3000);
 // https://www.vegvesen.no/vegkart/vegkart/#kartlag:geodata/vegreferanse:270896.3668887719:7040192.320446634/hva:(~(farge:'0_0,id:95))/@270874,7040224,18/vegobjekt:536626829:40a744:95
-
-
