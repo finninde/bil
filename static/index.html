@@ -8,6 +8,9 @@
     <!-- Not self hosted leaflet-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="loading-bar.css"/>
+    <script type="text/javascript" src="loading-bar.js"></script>-->
 </head>
   <body>
         <div id="mapid" style="height: 600px;"></div>
@@ -28,5 +31,34 @@
             console.log(msg);
             marker.setLatLng([msg.longVal,msg.latVal]);
         });
+        var vegobjektListe = [];
+        $.getJSON('http://localhost:3000/static/vegobjekter.json', function(data){
+          vegobjektListe = data;
+        });
+        var finnMarkers = [];
+        $.getJSON('https://www.vegvesen.no/nvdb/api/v2/vegobjekter/24' + '?kartutsnitt=10.4,63.4,10.42,63.5&srid=4326', 
+                  function(data){
+                    for (var i = 0; i<data.objekter.length ;i++){
+                      $.getJSON(data.objekter[i].href, function(data){
+                        finnMarkers.push(data);
+                      });
+                    }
+                    ;}
+        )
+        /*for (const i in vegobjektListe){
+          console.log(vegobjektListe[i].href);
+          $.getJSON(vegobjektListe[i].href + '?kartutsnitt=10.4,63.4,10.42,63.5&srid=4326', function(data){
+            //TODO: check if objectlist is empty of objects
+            console.log(data.objekter);
+            for (const i in data.objekter){
+              console.log(data.objekter[i].href)
+              $.getJSON(data.objekter[i].href, function(smthing){    
+                finnMarkers.push(smthing);
+                console.log(smthing);
+              });
+            }
+            //TODO: add marker with metainformation of object to map
+          });
+        }*/
     </script>
 </html>
