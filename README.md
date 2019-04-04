@@ -58,3 +58,4 @@ Vegobjektenes posisjon vil finnes i vegobjekter\[element\].geometri oppgitt vha.
 
 ## Mockup
 Mockup mappa inneholder et par shellscripts for å etterligne data som kan komme fra en bil. Det finnes en datapacket med longtitudes og latitudes det er tenkt at en bil kan sende, og et script longlatsender.sh som sender dem. longlatreset.sh setter bilen til \[0,0\].
+Merk at shellscriptene trenger et shell miljø, og programmet curl installert. 
