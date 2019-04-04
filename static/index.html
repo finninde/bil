@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
-    <!--<link rel="stylesheet" type="text/css" href="loading-bar.css"/>
-    <script type="text/javascript" src="loading-bar.js"></script>-->
 </head>
   <body>
         <div id="mapid" style="height: 600px;"></div>
 
   </body>
   <script>
+        // Initialize leaflet with view and level Note the cars default positin is at lat 0 long 0
         var mymap = L.map('mapid').setView([63.417831662, 10.401831726], 17);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -24,41 +23,27 @@
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoiZmlubmluIiwiYSI6ImNqdGZ4eWs1ODBpbnU0NG14eTcwdTV3NG8ifQ.AksRFmGXGIKC48PEO1XhYA'
         }).addTo(mymap);
-        var socket = io();
-        // Change default marker into something better
-        var marker = L.marker([51.5, -0.09]).addTo(mymap);
+        var marker = L.marker([0.0, 0.0]).addTo(mymap);
         socket.on('car position update', function(msg){
-            console.log(msg);
             marker.setLatLng([msg.longVal,msg.latVal]);
         });
+        // Initialize socketio, and connect
+        var socket = io();
+        // Query objects within hardcoded map section: longMin, latMin, longMax, latMax: 10.4,63.4,10.42,63.5
+        // Objects are able for inspection in webbrowser for further development
         var vegobjektListe = [];
         $.getJSON('http://localhost:3000/static/vegobjekter.json', function(data){
           vegobjektListe = data;
         });
-        var finnMarkers = [];
-        $.getJSON('https://www.vegvesen.no/nvdb/api/v2/vegobjekter/24' + '?kartutsnitt=10.4,63.4,10.42,63.5&srid=4326', 
-                  function(data){
-                    for (var i = 0; i<data.objekter.length ;i++){
-                      $.getJSON(data.objekter[i].href, function(data){
-                        finnMarkers.push(data);
-                      });
-                    }
-                    ;}
-        )
-        /*for (const i in vegobjektListe){
-          console.log(vegobjektListe[i].href);
+        var vegobjekter = [];
+        for (const i in vegobjektListe){
           $.getJSON(vegobjektListe[i].href + '?kartutsnitt=10.4,63.4,10.42,63.5&srid=4326', function(data){
-            //TODO: check if objectlist is empty of objects
-            console.log(data.objekter);
             for (const i in data.objekter){
-              console.log(data.objekter[i].href)
-              $.getJSON(data.objekter[i].href, function(smthing){    
-                finnMarkers.push(smthing);
-                console.log(smthing);
+              $.getJSON(data.objekter[i].href, function(vegobjekt){    
+                vegobjekter.push(vegobjekt);
               });
             }
-            //TODO: add marker with metainformation of object to map
           });
-        }*/
+        }
     </script>
 </html>
