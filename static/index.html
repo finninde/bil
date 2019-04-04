@@ -37,7 +37,6 @@
         });
         var vegobjekter = [];
         for (const i in vegobjektListe){
-          console.log(vegobjektListe[i].href);
           $.getJSON(vegobjektListe[i].href + '?kartutsnitt=10.4,63.4,10.42,63.5&srid=4326', function(data){
             for (const i in data.objekter){
               $.getJSON(data.objekter[i].href, function(vegobjekt){    
